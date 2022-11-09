@@ -23,7 +23,8 @@
         (.forward context (:cpf valor) (cadastrar-cliente valor) (To/child "cmd-cad-cli")))
       "cadastrar-livro"
       (when (= (:situacao valor) "pendente")
-        (.forward context (:cpf valor) (cadastrar-livro valor) (To/child "cmd-cad-lvr")))
+        (.forward context (:isbn valor) (cadastrar-livro valor) (To/child "cmd-cad-lvr"))  
+        )
       "fazer-login"
       (when (= (:situacao valor) "pendente")
         (.forward context (:cpf valor) (fazer-login valor) (To/child "cmd-exec-lgn")))

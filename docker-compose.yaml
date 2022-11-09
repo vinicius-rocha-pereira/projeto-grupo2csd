@@ -20,16 +20,16 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     depends_on:
       - zookeeper
-  cassandra:
-      image: bitnami/cassandra:latest
-      hostname: cassandra
-      container_name: cassandra
-      environment:
-          - CASSANDRA_BROADCAST_ADDRESS=host.docker.internal
-          - CASSANDRA_CLUSTER_NAME='consulta'
-      ports:
-          - "7000:7000"
-          - "9042:9042"
-      volumes:
-          - /path/to/cassandra.yaml:/bitnami/cassandra/conf/cassandra.yaml:ro
-          - /your/local/path/bitnami/cassandra:/bitnami
+  # cassandra:
+  #     image: bitnami/cassandra:latest
+  #     hostname: cassandra
+  #     container_name: cassandra
+  #     environment:
+  #         - CASSANDRA_BROADCAST_ADDRESS=host.docker.internal
+  #         - CASSANDRA_CLUSTER_NAME='consulta'
+  #     ports:
+  #         - "7000:7000"
+  #         - "9042:9042"
+  #     volumes:
+  #         - /path/to/cassandra.yaml:/bitnami/cassandra/conf/cassandra.yaml:ro
+  #         - /your/local/path/bitnami/cassandra:/bitnami

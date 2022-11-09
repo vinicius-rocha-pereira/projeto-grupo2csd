@@ -19,18 +19,18 @@
     {"isbn":"9780001912366", "cpf":"45698745612", "status_locacao":"Locado", "data_locacao":"2022-11-05", "data_devolucao":"2022-11-07", "data_limite":"2022-11-10,  "situacao":"pendente"}
 ```
 #Querys Cassandra
-CREATE KEYSPACE biblioteca_grupo2_csd WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 3};`
+CREATE KEYSPACE biblioteca_grupo2_csd WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 3};
 USE biblioteca_grupo2_csd;
 ...
 CREATE TABLE tbl_usuarios (nome text, data_nascimento date, cpf text, email text, senha text, contato text, cidade text, rua text, bairro text, numero text, complemento text, PRIMARY KEY ((cpf, senha)));`
 ...
 CREATE TABLE tbl_clientes (nome text, data_nascimento date, cpf text, email text, contato text, cidade text, rua text, bairro text, numero text, complemento text, PRIMARY KEY ((cpf)));
 ...
-CREATE TABLE tbl_livros_genero (isbn text, titulo text, genero text, autor text, editora text, qtd_paginas int, data_lancamento date, edicao text, qtd_livro int, PRIMARY KEY (genero, titulo, autor, data_lancamento, isbn));
+CREATE TABLE tbl_livros_genero (isbn text, titulo text, genero text, autor text, editora text, qtd_paginas text, data_lancamento text, edicao text, qtd_livro text, PRIMARY KEY (genero, titulo, autor, data_lancamento, isbn));
 ...
-CREATE TABLE tbl_livros_autor (isbn text, titulo text, genero text, autor text, editora text, qtd_paginas int, data_lancamento date, edicao text, qtd_livro int, PRIMARY KEY (autor, genero, titulo, data_lancamento, isbn));
+CREATE TABLE tbl_livros_autor (isbn text, titulo text, genero text, autor text, editora text, qtd_paginas text, data_lancamento text, edicao text, qtd_livro text, PRIMARY KEY (autor, genero, titulo, data_lancamento, isbn));
 ...
-CREATE TABLE tbl_livros_titulo (isbn text, titulo text, genero text, autor text, editora text, qtd_paginas int, data_lancamento date, edicao text, qtd_livro int, PRIMARY KEY (titulo, genero, autor, data_lancamento, isbn));
+CREATE TABLE tbl_livros_titulo (isbn text, titulo text, genero text, autor text, editora text, qtd_paginas text, data_lancamento text, edicao text, qtd_livro text, PRIMARY KEY (titulo, genero, autor, data_lancamento, isbn));
 ...
 CREATE TABLE tbl_movimentacoes_isbn (isbn text, cpf text, status_locacao text, data_locacao date, data_devolucao date, data_limite date, PRIMARY KEY (isbn, status_locacao, cpf));
 ...
@@ -44,8 +44,11 @@ kafka-topics.sh --create --bootstrap-server localhost:29092 --topic fazer-movime
 ...
 kafka-console-producer.sh --broker-list localhost:29092 --topic fazer-movimentacao --property "parse.key=true" --property "key.separator=:"
 ...
-kafka-console-producer.sh --broker-list localhost:29092 --topic cadastrar-usuarios
-kafka-console-consumer.sh --bootstrap-server localhost:29092 --topic cadastrar-usuarios
+kafka-console-producer.sh --broker-list localhost:29092 --topic cadastrar-livro
+kafka-console-consumer.sh --bootstrap-server localhost:29092 --topic cadastrar-livro
 ...
 {"situacao":"pendente","nome":"vinicius", "cpf":"03542165425"}
 {"situacao": "pendente", "velocidade": 99, "placa": "AAA-0001", "multa": 200.0, "pontos": 7}
+
+
+{"isbn":"9780001912366", "titulo":"Harry Potter e a Pedra Filosofal", "genero":"Fantasia", "autor":"J. K. Rowling", "editora":"Rocco", "qtd_paginas":"500", "data_lancamento":"1997-06-27", "edicao":"1", "qtd_livro":"10",  "situacao":"pendente"}
